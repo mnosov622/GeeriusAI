@@ -7,6 +7,7 @@ import {
 	Settings,
 	VideoIcon,
 } from 'lucide-react';
+import * as z from 'zod';
 
 export const TOOLS = [
 	{
@@ -89,3 +90,9 @@ export const ROUTES = [
 		href: '/settings',
 	},
 ];
+
+export const formSchema = z.object({
+	prompt: z.string().min(1, {
+		message: 'Prompt is required',
+	}),
+});
