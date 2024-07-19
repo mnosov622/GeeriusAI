@@ -37,7 +37,7 @@ export default function MusicPage() {
 
 			console.log(response);
 
-			setMusic(response.data.audio);
+			setMusic(response.data);
 
 			form.reset();
 		} catch (e) {

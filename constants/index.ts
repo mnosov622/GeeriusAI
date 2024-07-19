@@ -43,8 +43,8 @@ export const formSchema = z.object({
 	prompt: z.string().min(1, {
 		message: 'Image Prompt is required',
 	}),
-	amount: z.string().min(1),
-	resolution: z.string().min(1),
+	amount: z.string().min(1).optional(),
+	resolution: z.string().min(1).optional(),
 });
 
 export const amountOptions = [

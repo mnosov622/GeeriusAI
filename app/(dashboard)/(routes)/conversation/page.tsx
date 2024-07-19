@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-export default function Conversation() {
+export default function ConversationPage() {
 	const router = useRouter();
 	const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
 
@@ -31,6 +31,8 @@ export default function Conversation() {
 	});
 
 	const isLoading = form.formState.isSubmitting;
+
+	const errors = form.formState.errors;
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		console.log(values);
