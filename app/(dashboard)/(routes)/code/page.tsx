@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 import { ChatCompletionMessage } from 'openai/resources/chat/index.mjs';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import ReactMarkDown from 'react-markdown';
 import * as z from 'zod';
 
@@ -148,7 +149,12 @@ export default function CodePage() {
 										<Copy
 											className="w-6 h-6 cursor-pointer absolute top-4 right-4"
 											onClick={() => {
-												navigator.clipboard.writeText(String(message.content));
+												const codeWithoutLanguage = String(message.content).replace(
+													/```jsx|```/g,
+													''
+												);
+												navigator.clipboard.writeText(codeWithoutLanguage);
+												toast.success('Code copied to clipboard');
 											}}
 										/>
 									</>
