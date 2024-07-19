@@ -1,11 +1,63 @@
 'use client';
 
-import { ROUTES } from '@/constants';
 import { cn } from '@/lib/utils';
+import {
+	Code,
+	ImageIcon,
+	LayoutDashboard,
+	MessageSquare,
+	MusicIcon,
+	Settings,
+	VideoIcon,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import logo from '../public/logo-no-background.svg';
+
+const routes = [
+	{
+		label: 'Dashboard',
+		icon: LayoutDashboard,
+		color: 'text-sky-500',
+		href: '/dashboard',
+	},
+	{
+		label: 'Conversation',
+		icon: MessageSquare,
+		color: 'text-violet-500',
+		href: '/conversation',
+	},
+	{
+		label: 'Image Generation',
+		icon: ImageIcon,
+		color: 'text-pink-700',
+		href: '/image',
+	},
+	{
+		label: 'Video Generation',
+		icon: VideoIcon,
+		color: 'text-orange-700',
+		href: '/video',
+	},
+	{
+		label: 'Music Generation',
+		icon: MusicIcon,
+		color: 'text-emerald-700',
+		href: '/music',
+	},
+	{
+		label: 'Code Generation',
+		icon: Code,
+		color: 'text-green-700',
+		href: '/code',
+	},
+	{
+		label: 'Settings',
+		icon: Settings,
+		href: '/settings',
+	},
+];
 
 export default function Sidebar() {
 	const pathName = usePathname();
@@ -26,7 +78,7 @@ export default function Sidebar() {
 					</div>
 				</Link>
 				<div className="space-y-1">
-					{ROUTES.map((route, index) => (
+					{routes.map((route, index) => (
 						<Link
 							key={index}
 							href={route.href}
