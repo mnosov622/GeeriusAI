@@ -1,12 +1,12 @@
-import logo from '../public/logo-no-background.svg';
+import bot from '../public/robot.png';
 import { Avatar, AvatarImage } from './ui/avatar';
 
 export default function BotAvatar() {
 	return (
-		<Avatar className="h-8 w-8">
+		<Avatar className="h-10 w-10">
 			<AvatarImage
-				className="p-1"
-				src={logo}
+				className="p-1 rounded-full"
+				src={bot.src}
 			/>
 		</Avatar>
 	);
