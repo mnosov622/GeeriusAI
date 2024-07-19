@@ -4,6 +4,7 @@ import Empty from '@/components/empty';
 import Heading from '@/components/heading';
 import Loader from '@/components/loader';
 import { Button } from '@/components/ui/button';
+import { Card, CardFooter } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import {
@@ -16,13 +17,14 @@ import {
 import { amountOptions, formSchema, resolutionOptions } from '@/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
-import { ImageIcon } from 'lucide-react';
+import { Download, ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-export default function Image() {
+export default function ImagePage() {
 	const router = useRouter();
 	const [images, setImages] = useState<string[]>([]);
 
@@ -169,7 +171,33 @@ export default function Image() {
 						</div>
 					)}
 					{images.length === 0 && !isLoading && <Empty label="No image generations yet" />}
-					<div>Images will be rendered here</div>
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+						{images.map((src, index) => (
+							<Card
+								className="rounded-lg overflow-hidden"
+								key={index}
+							>
+								<div className="relative aspect-square">
+									<Image
+										src={src}
+										alt="Generated image"
+										fill
+										objectFit="cover"
+									/>
+								</div>
+								<CardFooter className="p-2">
+									<Button
+										onClick={() => window.open(src)}
+										variant="secondary"
+										className="w-full"
+									>
+										<Download className="w-4 h-4 mr-2" />
+										Download
+									</Button>
+								</CardFooter>
+							</Card>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>
