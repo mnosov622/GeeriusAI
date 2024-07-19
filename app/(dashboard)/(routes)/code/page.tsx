@@ -12,14 +12,15 @@ import { formSchema } from '@/constants';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
-import { MessageSquare } from 'lucide-react';
+import { Code, Copy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ChatCompletionMessage } from 'openai/resources/chat/index.mjs';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import ReactMarkDown from 'react-markdown';
 import * as z from 'zod';
 
-export default function Conversation() {
+export default function CodePage() {
 	const router = useRouter();
 	const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
 
@@ -41,7 +42,7 @@ export default function Conversation() {
 
 			const newMessages = [...messages, userMessage];
 
-			const response = await axios.post('/api/conversation', {
+			const response = await axios.post('/api/code', {
 				messages: newMessages,
 			});
 
@@ -58,11 +59,11 @@ export default function Conversation() {
 	return (
 		<div>
 			<Heading
-				title="Conversation"
-				description="Our most advanced conversation model."
-				icon={MessageSquare}
-				iconColor="text-violet-500"
-				bgColor="bg-violet-500/10"
+				title="Code Generation"
+				description="Generate code using descriptive text."
+				icon={Code}
+				iconColor="text-green-700"
+				bgColor="bg-green-700/10"
 			/>
 
 			<div className="px-4 lg:px-8">
@@ -80,7 +81,7 @@ export default function Conversation() {
 											<Input
 												className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
 												{...field}
-												placeholder="How do I calculate the area of a circle?"
+												placeholder="Simple toggle button using react hooks."
 												disabled={isLoading}
 											/>
 										</FormControl>
@@ -104,18 +105,54 @@ export default function Conversation() {
 						</div>
 					)}
 					{messages.length === 0 && !isLoading && <Empty label="No conversation started" />}
-					<div className="flex flex-col reverse gap-y-4">
+					<div className="flex flex-col reverse gap-y-4 w-[90%]">
 						{messages.map((message, index) => (
 							<div
 								key={index}
 								className={cn(
-									'p-4 w-full flex items-center gap-x-8 rounded-lg',
+									'p-4 w-full flex items-center gap-x-8 rounded-lg break-all relative',
 									message.role === 'user' ? 'bg-white border border-black/10' : 'bg-muted'
 								)}
 							>
 								{message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
 
-								<p className="text-sm">{message.content}</p>
+								{message.role === 'user' ? (
+									<div>{message.content}</div>
+								) : (
+									<>
+										{/* <SyntaxHighlighter
+										language="javascript"
+										style={customStyle}
+									>
+										{String(message.content)}
+									</SyntaxHighlighter> */}
+
+										<ReactMarkDown
+											components={{
+												pre: ({ node, ...props }) => (
+													<div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
+														<pre {...props} />
+													</div>
+												),
+												code: ({ node, ...props }) => (
+													<code
+														className="bg-black/10 rounded-lg p-1"
+														{...props}
+													/>
+												),
+											}}
+											className="text-sm overflow-hidden"
+										>
+											{message.content}
+										</ReactMarkDown>
+										<Copy
+											className="w-6 h-6 cursor-pointer absolute top-4 right-4"
+											onClick={() => {
+												navigator.clipboard.writeText(String(message.content));
+											}}
+										/>
+									</>
+								)}
 							</div>
 						))}
 					</div>
