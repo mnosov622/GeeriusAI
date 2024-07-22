@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import UserAvatar from '@/components/user-avatar';
 import { formSchema } from '@/constants';
+import { useProModal } from '@/hooks/use-pro-modal';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
@@ -22,6 +23,8 @@ import ReactMarkDown from 'react-markdown';
 import * as z from 'zod';
 
 export default function CodePage() {
+	const { onOpen } = useProModal();
+
 	const router = useRouter();
 	const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
 
@@ -49,8 +52,10 @@ export default function CodePage() {
 
 			setMessages((current) => [...current, userMessage, response.data]);
 			form.reset();
-		} catch (e) {
-			//TODO:Open pro modal
+		} catch (e: any) {
+			if (e?.response?.status === 403) {
+				onOpen();
+			}
 			console.log('Conversation error', e);
 		} finally {
 			router.refresh();

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { formSchema } from '@/constants';
+import { useProModal } from '@/hooks/use-pro-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { Music } from 'lucide-react';
@@ -16,6 +17,8 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 export default function MusicPage() {
+	const { onOpen } = useProModal();
+
 	const router = useRouter();
 	const [music, setMusic] = useState<string | null>(null);
 
@@ -30,18 +33,17 @@ export default function MusicPage() {
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		try {
-			console.log(values);
 			setMusic(null);
 
 			const response = await axios.post('/api/music', values);
 
-			console.log(response);
-
 			setMusic(response.data);
 
 			form.reset();
-		} catch (e) {
-			//TODO:Open pro modal
+		} catch (e: any) {
+			if (e?.response?.status === 403) {
+				onOpen();
+			}
 			console.log('Conversation error', e);
 		} finally {
 			router.refresh();

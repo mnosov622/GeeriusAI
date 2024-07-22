@@ -15,6 +15,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { amountOptions, formSchema, resolutionOptions } from '@/constants';
+import { useProModal } from '@/hooks/use-pro-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { Download, ImageIcon } from 'lucide-react';
@@ -25,6 +26,8 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 export default function ImagePage() {
+	const { onOpen } = useProModal();
+
 	const router = useRouter();
 	const [images, setImages] = useState<string[]>([]);
 
@@ -50,8 +53,11 @@ export default function ImagePage() {
 			setImages(urls);
 
 			form.reset();
-		} catch (e) {
-			//TODO:Open pro modal
+		} catch (e: any) {
+			if (e?.response?.status === 403) {
+				onOpen();
+			}
+
 			console.log('Conversation error', e);
 		} finally {
 			router.refresh();
