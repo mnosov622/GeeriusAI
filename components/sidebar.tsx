@@ -14,6 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import logo from '../public/logo-no-background.svg';
+import FreeCounter from './free-counter';
 
 const routes = [
 	{
@@ -59,7 +60,7 @@ const routes = [
 	},
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ apiLimitCount = 0 }: { apiLimitCount: number }) {
 	const pathName = usePathname();
 
 	return (
@@ -95,6 +96,8 @@ export default function Sidebar() {
 					))}
 				</div>
 			</div>
+
+			<FreeCounter apiLimitCount={apiLimitCount} />
 		</div>
 	);
 }
