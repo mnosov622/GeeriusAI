@@ -1,5 +1,5 @@
 import { MAX_FREE_COUNTS } from '@/constants';
-import { auth } from '@clerk/nextjs/server';
+import { auth, currentUser } from '@clerk/nextjs/server';
 import prismadb from './prisma.db';
 
 export const increaseApiLimit = async () => {
@@ -19,10 +19,17 @@ export const increaseApiLimit = async () => {
 			data: { count: { increment: 1 } },
 		});
 	} else {
+		const user = await currentUser();
+
+		const userEmail = user?.emailAddresses[0]?.emailAddress;
+		const userName = user?.firstName + ' ' + user?.lastName;
+
 		await prismadb.userApiLimit.create({
 			data: {
 				userId,
 				count: 1,
+				email: userEmail,
+				userName: userName,
 			},
 		});
 	}
