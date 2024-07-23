@@ -33,7 +33,7 @@ Automate your coding tasks with AI-generated code. Enhance your development proc
 - No credit card required
 
 ### Pro Plan
-- $20 Lifetime Access
+- Only $10/month
 - Unlimited Generations
 - Priority Support
 - Access to all future updates
