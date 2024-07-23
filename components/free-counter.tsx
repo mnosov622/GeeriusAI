@@ -6,7 +6,13 @@ import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Progress } from './ui/progress';
 
-export default function FreeCounter({ apiLimitCount = 0 }: { apiLimitCount: number }) {
+export default function FreeCounter({
+	apiLimitCount = 0,
+	isPro = false,
+}: {
+	apiLimitCount: number;
+	isPro: boolean;
+}) {
 	const [mounted, setMount] = useState(false);
 
 	const { onOpen } = useProModal();
@@ -16,6 +22,10 @@ export default function FreeCounter({ apiLimitCount = 0 }: { apiLimitCount: numb
 	}, []);
 
 	if (!mounted) {
+		return null;
+	}
+
+	if (isPro) {
 		return null;
 	}
 
