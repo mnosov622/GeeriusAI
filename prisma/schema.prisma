@@ -18,7 +18,7 @@ model UserApiLimit {
   id String @id @default(cuid())
   userId String @unique
   email String @unique @default("")
-  userName String @unique @default("")
+  userName String @default("")
   count Int @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
