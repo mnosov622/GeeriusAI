@@ -13,12 +13,8 @@ export default function LandingLayout({ children }: { children: React.ReactNode 
 	}
 
 	return (
-		<html lang="en">
-			<body className="bg-[#111827]">
-				<main className="h-full bg-[#111827]">
-					<div className="mx-auto max-w-screen-xl h-full bg-[#111827]">{children}</div>
-				</main>
-			</body>
-		</html>
+		<main className="bg-[#111827]">
+			<div className="mx-auto max-w-screen-xl h-full bg-[#111827]">{children}</div>
+		</main>
 	);
 }
