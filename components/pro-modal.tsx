@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import axios from 'axios';
 import { Check, Zap } from 'lucide-react';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
@@ -29,6 +30,7 @@ export default function ProModal() {
 			window.location.href = response.data.url;
 		} catch (e) {
 			console.log('Stripe error', e);
+			toast.error('Something went wrong. Try again.');
 		} finally {
 			setLoading(false);
 		}
@@ -76,6 +78,7 @@ export default function ProModal() {
 						variant="premium"
 						className="w-full"
 						onClick={onSubscribe}
+						disabled={loading}
 					>
 						Upgrade
 						<Zap className="w-4 h-4 ml-2 fill-white" />

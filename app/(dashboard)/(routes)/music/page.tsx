@@ -14,6 +14,7 @@ import { Music } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import * as z from 'zod';
 
 export default function MusicPage() {
@@ -43,8 +44,9 @@ export default function MusicPage() {
 		} catch (e: any) {
 			if (e?.response?.status === 403) {
 				onOpen();
+			} else {
+				toast.error('Something went wrong. Try again.');
 			}
-			console.log('Conversation error', e);
 		} finally {
 			router.refresh();
 		}

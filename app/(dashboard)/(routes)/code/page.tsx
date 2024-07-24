@@ -55,6 +55,8 @@ export default function CodePage() {
 		} catch (e: any) {
 			if (e?.response?.status === 403) {
 				onOpen();
+			} else {
+				toast.error('Something went wrong. Try again.');
 			}
 			console.log('Conversation error', e);
 		} finally {

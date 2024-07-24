@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { ChatCompletionMessage } from 'openai/resources/chat/index.mjs';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import * as z from 'zod';
 
 export default function ConversationPage() {
@@ -55,6 +56,8 @@ export default function ConversationPage() {
 		} catch (e: any) {
 			if (e?.response?.status === 403) {
 				onOpen();
+			} else {
+				toast.error('Something went wrong. Try again.');
 			}
 		} finally {
 			router.refresh();

@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { Zap } from 'lucide-react';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Button } from './ui/button';
 
 interface SubscriptionButtonProps {
@@ -20,6 +21,7 @@ export default function SubscriptionButton({ isPro = false }: SubscriptionButton
 			window.location.href = response.data.url;
 		} catch (e) {
 			console.error(e);
+			toast.error('Something went wrong. Try again.');
 		} finally {
 			setLoading(false);
 		}
