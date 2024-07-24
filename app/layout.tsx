@@ -1,3 +1,4 @@
+import ChrisProvider from '@/components/crisp-provider';
 import ModalProvider from '@/components/modal-provider';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
@@ -23,6 +24,7 @@ export default function RootLayout({
 				<body className={inter.className}>
 					{children}
 
+					<ChrisProvider />
 					<ModalProvider />
 					<Toaster />
 				</body>

@@ -13,7 +13,7 @@ export default async function NavBar() {
 				apiLimitCount={apiLimitCount}
 				isPro={isPro}
 			/>
-			<div className="flex w-full justify-end">
+			<div className="flex w-full justify-end min-h-[28px]">
 				<UserButton afterSignOutUrl="/" />
 			</div>
 		</div>
