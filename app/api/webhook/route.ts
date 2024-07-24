@@ -1,6 +1,5 @@
 import prismadb from '@/lib/prisma.db';
 import { stripe } from '@/lib/stripe';
-import { currentUser } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
@@ -42,7 +41,7 @@ export async function POST(req: Request) {
 
 	if (event.type === 'checkout.session.completed') {
 		const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
-		const user = await currentUser();
+
 		if (!session?.metadata?.userId) {
 			return new Response('User ID is required', { status: 400 });
 		}
