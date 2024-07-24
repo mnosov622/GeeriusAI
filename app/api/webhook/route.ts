@@ -3,6 +3,8 @@ import { stripe } from '@/lib/stripe';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
+export const maxDuration = 60;
+
 async function getRawBody(req: Request): Promise<Buffer> {
 	const reader = req.body?.getReader();
 	const chunks = [];

@@ -4,6 +4,8 @@ import { absoluteUrl } from '@/lib/utils';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
+export const maxDuration = 60;
+
 const settingsUrl = absoluteUrl('/settings');
 
 export async function GET() {
