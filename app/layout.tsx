@@ -10,8 +10,9 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'GenerAI',
-	description: 'AI platform',
+	title: 'Geerius AI',
+	description:
+		'AI platform. Talk with chatbots, generate music, code, convert text to speech and more.',
 };
 
 export default function RootLayout({
