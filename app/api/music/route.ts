@@ -4,7 +4,7 @@ import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import Replicate from 'replicate';
 
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 const replicate = new Replicate({
 	auth: process.env.REPLICATE_API_TOKEN,
