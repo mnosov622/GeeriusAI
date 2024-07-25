@@ -45,7 +45,7 @@ export async function GET() {
 					price_data: {
 						currency: 'usd',
 						product_data: {
-							name: 'GenerAI Pro',
+							name: 'Geerius Pro',
 							description: 'Unlimited AI Generations',
 						},
 						unit_amount: 899,
