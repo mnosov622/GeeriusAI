@@ -55,8 +55,8 @@ export default function LandingContent() {
 									<Image
 										src={testimonial.avatar}
 										alt={testimonial.name}
-										width={50}
-										height={50}
+										width={500}
+										height={500}
 										className="rounded-full h-[50px] w-[50px] object-cover"
 									/>
 
