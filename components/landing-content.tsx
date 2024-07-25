@@ -57,7 +57,7 @@ export default function LandingContent() {
 										alt={testimonial.name}
 										width={50}
 										height={50}
-										className="rounded-full"
+										className="rounded-full h-[50px] w-[50px] object-cover"
 									/>
 
 									<div className="flex flex-col">
