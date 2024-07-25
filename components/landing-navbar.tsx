@@ -1,6 +1,6 @@
 'use client';
 
-import logo from '@/public/logo-no-background.svg';
+import logo from '@/public/logo-no-background.png';
 import { useAuth } from '@clerk/nextjs';
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
@@ -18,15 +18,16 @@ export default function LandingNavbar() {
 		<nav className="p-4 bg-transparent flex items-center justify-between">
 			<Link
 				href="/"
-				className="flex-items-center"
+				className="flex items-center"
 			>
-				<div className="relative h-32 w-32 mr-4">
+				<div className="relative h-12 w-14 mr-3 mt-4">
 					<Image
 						src={logo}
 						alt="logo"
 						fill
 					/>
 				</div>
+				<h1 className={`${font.className} mt-4 text-white text-lg`}>Geerius AI</h1>
 			</Link>
 
 			<div className="flex items-center gap-x-2">

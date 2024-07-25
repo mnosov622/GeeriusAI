@@ -11,11 +11,14 @@ import {
 	Speech,
 	VideoIcon,
 } from 'lucide-react';
+import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import logo from '../public/logo-no-background.svg';
+import logo from '../public/logo-no-background.png';
 import FreeCounter from './free-counter';
+
+const MontserratFont = Montserrat({ subsets: ['latin'], weight: '600' });
 
 const routes = [
 	{
@@ -81,15 +84,16 @@ export default function Sidebar({
 			<div className="px-3 py-2 flex-1">
 				<Link
 					href="/dashboard"
-					className="flex items-center pl-3"
+					className="flex items-center pl-3 mb-6"
 				>
-					<div className="relative w-24 h-24 mr-4 mt-[-30px] mb-[10px]">
+					<div className="relative w-8 h-[1.8rem] mr-3 mb-[10px]">
 						<Image
 							fill
 							alt="logo"
 							src={logo}
 						/>
 					</div>
+					<h1 className={`${MontserratFont.className} mb-2`}>Geerius AI</h1>
 				</Link>
 				<div className="space-y-1">
 					{routes.map((route, index) => (
