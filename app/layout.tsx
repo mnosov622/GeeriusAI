@@ -1,6 +1,7 @@
 import ChrisProvider from '@/components/crisp-provider';
 import ModalProvider from '@/components/modal-provider';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
@@ -27,6 +28,7 @@ export default function RootLayout({
 					<ChrisProvider />
 					<ModalProvider />
 					<Toaster />
+					<Analytics />
 				</body>
 			</html>
 		</ClerkProvider>
