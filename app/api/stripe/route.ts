@@ -48,7 +48,7 @@ export async function GET() {
 							name: 'GenerAI Pro',
 							description: 'Unlimited AI Generations',
 						},
-						unit_amount: 1000,
+						unit_amount: 100,
 						recurring: { interval: 'month' },
 					},
 					quantity: 1,
