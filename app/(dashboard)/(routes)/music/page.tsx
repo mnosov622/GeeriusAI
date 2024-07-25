@@ -42,8 +42,6 @@ export default function MusicPage() {
 
 	const isLoading = form.formState.isSubmitting;
 
-	const errors = form.formState.errors;
-
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		track('Music Generation');
 		try {
