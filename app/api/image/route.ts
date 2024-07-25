@@ -2,12 +2,12 @@ import { checkApiLimit, increaseApiLimit } from '@/lib/api-limit';
 import { checkSubscription } from '@/lib/subscription';
 import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import Replicate from 'replicate';
 
 export const maxDuration = 300;
 
-const openai = new OpenAI({
-	apiKey: process.env.OPEN_AI_KEY,
+const replicate = new Replicate({
+	auth: process.env.REPLICATE_API_TOKEN,
 });
 
 export async function POST(req: Request) {
@@ -16,17 +16,13 @@ export async function POST(req: Request) {
 
 		const body = await req.json();
 
-		const { prompt, amount = 1, resolution = '512x512' } = body;
+		const { prompt } = body;
 
 		if (!userId) {
 			return new NextResponse('Unauthorized', { status: 401 });
 		}
 
-		if (!openai.apiKey) {
-			return new NextResponse('OpenAI API KEY not configured', { status: 500 });
-		}
-
-		if (!prompt || !amount || !resolution) {
+		if (!prompt) {
 			return new NextResponse('prompt, amount and resolution are required', { status: 400 });
 		}
 
@@ -38,17 +34,24 @@ export async function POST(req: Request) {
 			return new NextResponse('Free Trial has expired', { status: 403 });
 		}
 
-		const response = await openai.images.generate({
+		const input = {
+			cfg: 3.5,
+			steps: 28,
 			prompt: prompt,
-			n: parseInt(amount, 10),
-			size: resolution,
-		});
+			aspect_ratio: '3:2',
+			output_format: 'webp',
+			output_quality: 90,
+			negative_prompt: '',
+			prompt_strength: 0.85,
+		};
+
+		const response = await replicate.run('stability-ai/stable-diffusion-3', { input });
 
 		if (!isPro) {
 			await increaseApiLimit();
 		}
 
-		return new NextResponse(JSON.stringify(response.data), { status: 200 });
+		return new NextResponse(JSON.stringify(response), { status: 200 });
 	} catch (e) {
 		console.log('Image error', e);
 		return new NextResponse('Internal server error', { status: 500 });

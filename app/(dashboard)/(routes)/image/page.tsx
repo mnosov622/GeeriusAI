@@ -7,14 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardFooter } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
-import { amountOptions, formSchema, resolutionOptions } from '@/constants';
+import { formSchema } from '@/constants';
 import { useProModal } from '@/hooks/use-pro-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { track } from '@vercel/analytics';
@@ -37,8 +30,6 @@ export default function ImagePage() {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			prompt: '',
-			amount: '1',
-			resolution: '512x512',
 		},
 	});
 
@@ -98,69 +89,6 @@ export default function ImagePage() {
 												disabled={isLoading}
 											/>
 										</FormControl>
-									</FormItem>
-								)}
-							/>
-							<FormField
-								name="amount"
-								control={form.control}
-								render={({ field }) => (
-									<FormItem className="col-span-12 lg:col-span-2">
-										<Select
-											{...field}
-											disabled={isLoading}
-											onValueChange={field.onChange}
-											defaultValue={field.value}
-										>
-											<FormControl>
-												<SelectTrigger>
-													<SelectValue defaultValue={field.value} />
-												</SelectTrigger>
-											</FormControl>
-
-											<SelectContent>
-												{amountOptions.map((option) => (
-													<SelectItem
-														key={option.value}
-														value={option.value}
-													>
-														{option.label}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-									</FormItem>
-								)}
-							/>
-
-							<FormField
-								name="resolution"
-								control={form.control}
-								render={({ field }) => (
-									<FormItem className="col-span-12 lg:col-span-2">
-										<Select
-											{...field}
-											disabled={isLoading}
-											onValueChange={field.onChange}
-											defaultValue={field.value}
-										>
-											<FormControl>
-												<SelectTrigger>
-													<SelectValue defaultValue={field.value} />
-												</SelectTrigger>
-											</FormControl>
-
-											<SelectContent>
-												{resolutionOptions.map((option) => (
-													<SelectItem
-														key={option.value}
-														value={option.value}
-													>
-														{option.label}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
 									</FormItem>
 								)}
 							/>
