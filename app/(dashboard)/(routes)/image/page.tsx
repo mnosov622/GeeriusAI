@@ -80,7 +80,7 @@ export default function ImagePage() {
 							<FormField
 								name="prompt"
 								render={({ field }) => (
-									<FormItem className="col-span-12 lg:col-span-10 w-full">
+									<FormItem className="col-span-12 lg:col-span-8 w-full">
 										<FormControl className="m-0 p-0">
 											<Input
 												className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
@@ -94,7 +94,7 @@ export default function ImagePage() {
 							/>
 
 							<Button
-								className="col-span-12 lg:col-span-2 w-auto ml-auto"
+								className="col-span-12 lg:col-span-4 ml-auto"
 								type="submit"
 								disabled={isLoading}
 							>

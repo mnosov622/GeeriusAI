@@ -8,6 +8,7 @@ import {
 	MessageSquare,
 	MusicIcon,
 	Settings,
+	Speech,
 	VideoIcon,
 } from 'lucide-react';
 import Image from 'next/image';
@@ -52,6 +53,12 @@ const routes = [
 		icon: Code,
 		color: 'text-green-700',
 		href: '/code',
+	},
+	{
+		label: 'Text to Speech Generation',
+		icon: Speech,
+		color: 'text-blue-700',
+		href: '/text-to-speech',
 	},
 	{
 		label: 'Settings',
