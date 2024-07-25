@@ -11,7 +11,7 @@ export default function Loader() {
 					fill
 				/>
 			</div>
-			<p className="text-sm text-muted-foreground">GenerAI is thinking...</p>
+			<p className="text-sm text-muted-foreground">GeeriusAI is thinking...</p>
 		</div>
 	);
 }
