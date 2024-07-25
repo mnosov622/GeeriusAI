@@ -45,42 +45,25 @@ export const formSchema = z.object({
 	prompt: z.string().min(1, {
 		message: 'Image Prompt is required',
 	}),
+	type: z.string().optional(),
+	duration: z.string().optional(),
 });
 
-export const amountOptions = [
+export const melodyType = [
 	{
-		value: '1',
-		label: '1 Photo',
+		value: 'stereo-melody-large',
+		label: 'Stereo Melody Large',
 	},
 	{
-		value: '2',
-		label: '2 Photos',
+		value: 'stereo-large',
+		label: 'Stereo Large',
 	},
 	{
-		value: '3',
-		label: '3 Photos',
+		value: 'melody-large',
+		label: 'Melody Large',
 	},
 	{
-		value: '4',
-		label: '4 Photos',
-	},
-	{
-		value: '5',
-		label: '5 Photos',
-	},
-];
-
-export const resolutionOptions = [
-	{
-		value: '256x256',
-		label: '256x256',
-	},
-	{
-		value: '512x512',
-		label: '512x512',
-	},
-	{
-		value: '1024x1024',
-		label: '1024x1024',
+		value: 'large',
+		label: 'Large',
 	},
 ];

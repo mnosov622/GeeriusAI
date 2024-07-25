@@ -6,6 +6,8 @@ import Replicate from 'replicate';
 
 export const maxDuration = 300;
 
+const maxMusicDuration = 60;
+
 const replicate = new Replicate({
 	auth: process.env.REPLICATE_API_TOKEN,
 });
@@ -16,7 +18,7 @@ export async function POST(req: Request) {
 
 		const body = await req.json();
 
-		const { prompt } = body;
+		const { prompt, duration, type } = body;
 
 		if (!userId) {
 			return new NextResponse('Unauthorized', { status: 401 });
@@ -33,17 +35,30 @@ export async function POST(req: Request) {
 			return new NextResponse('Free Trial has expired', { status: 403 });
 		}
 
-		const input = {
-			prompt: prompt,
-			model_version: 'stereo-large',
-			output_format: 'mp3',
-			normalization_strategy: 'peak',
-			auth: process.env.REPLICATE_API_TOKEN,
-		};
+		if (Number(duration) > maxMusicDuration) {
+			return new NextResponse(`Duration should be less than ${maxMusicDuration} seconds`, {
+				status: 400,
+			});
+		}
 
 		const response = await replicate.run(
 			'meta/musicgen:671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb',
-			{ input }
+			{
+				input: {
+					top_k: 250,
+					top_p: 0,
+					prompt: prompt,
+					duration: Number(duration),
+					temperature: 1,
+					continuation: false,
+					model_version: type,
+					output_format: 'mp3',
+					continuation_start: 0,
+					multi_band_diffusion: false,
+					normalization_strategy: 'peak',
+					classifier_free_guidance: 3,
+				},
+			}
 		);
 
 		if (!isPro) {

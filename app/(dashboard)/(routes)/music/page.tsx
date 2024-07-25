@@ -6,7 +6,14 @@ import Loader from '@/components/loader';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { formSchema } from '@/constants';
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
+import { formSchema, melodyType } from '@/constants';
 import { useProModal } from '@/hooks/use-pro-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { track } from '@vercel/analytics';
@@ -28,10 +35,14 @@ export default function MusicPage() {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			prompt: '',
+			type: 'stereo-melody-large',
+			duration: '8',
 		},
 	});
 
 	const isLoading = form.formState.isSubmitting;
+
+	const errors = form.formState.errors;
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		track('Music Generation');
@@ -74,7 +85,7 @@ export default function MusicPage() {
 							<FormField
 								name="prompt"
 								render={({ field }) => (
-									<FormItem className="col-span-12 lg:col-span-10">
+									<FormItem className="col-span-12 lg:col-span-6">
 										<FormControl className="m-0 p-0">
 											<Input
 												className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
@@ -86,6 +97,55 @@ export default function MusicPage() {
 									</FormItem>
 								)}
 							/>
+
+							<FormField
+								name="type"
+								control={form.control}
+								render={({ field }) => (
+									<FormItem className="col-span-12 lg:col-span-2">
+										<Select
+											{...field}
+											disabled={isLoading}
+											onValueChange={field.onChange}
+											defaultValue={field.value}
+										>
+											<FormControl>
+												<SelectTrigger>
+													<SelectValue defaultValue={field.value} />
+												</SelectTrigger>
+											</FormControl>
+
+											<SelectContent>
+												{melodyType.map((option) => (
+													<SelectItem
+														key={option.value}
+														value={option.value}
+													>
+														{option.label}
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
+									</FormItem>
+								)}
+							/>
+
+							<FormField
+								name="duration"
+								control={form.control}
+								render={({ field }) => (
+									<FormItem className="col-span-12 lg:col-span-2">
+										<Input
+											{...field}
+											type="number"
+											placeholder="Duration"
+											max={60}
+											defaultValue={field.value}
+										/>
+									</FormItem>
+								)}
+							/>
+
 							<Button
 								className="col-span-12 lg:col-span-2 w-full"
 								type="submit"
