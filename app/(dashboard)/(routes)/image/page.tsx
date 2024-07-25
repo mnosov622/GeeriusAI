@@ -24,7 +24,7 @@ export default function ImagePage() {
 	const { onOpen } = useProModal();
 
 	const router = useRouter();
-	const [images, setImages] = useState<string[]>([]);
+	const [image, setImage] = useState<string | null>(null);
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -38,13 +38,13 @@ export default function ImagePage() {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		track('Image Generation');
 		try {
-			setImages([]);
+			setImage(null);
 
 			const response = await axios.post('/api/image', values);
 
-			const urls = response.data.map((image: { url: string }) => image.url);
+			console.log('Image response', response.data[0]);
 
-			setImages(urls);
+			setImage(response.data[0]);
 
 			form.reset();
 		} catch (e: any) {
@@ -75,12 +75,12 @@ export default function ImagePage() {
 					<Form {...form}>
 						<form
 							onSubmit={form.handleSubmit(onSubmit)}
-							className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
+							className="rounded-lg border w-full flex p-4 px-3 md:px-6 focus-within:shadow-sm"
 						>
 							<FormField
 								name="prompt"
 								render={({ field }) => (
-									<FormItem className="col-span-12 lg:col-span-6">
+									<FormItem className="col-span-12 lg:col-span-6 w-full">
 										<FormControl className="m-0 p-0">
 											<Input
 												className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
@@ -94,7 +94,7 @@ export default function ImagePage() {
 							/>
 
 							<Button
-								className="col-span-12 lg:col-span-2 w-full"
+								className="col-span-12 lg:col-span-2 w-auto ml-auto"
 								type="submit"
 								disabled={isLoading}
 							>
@@ -109,16 +109,13 @@ export default function ImagePage() {
 							<Loader />
 						</div>
 					)}
-					{images.length === 0 && !isLoading && <Empty label="No image generations yet" />}
+					{!image && !isLoading && <Empty label="No image generations yet" />}
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
-						{images.map((src, index) => (
-							<Card
-								className="rounded-lg overflow-hidden"
-								key={index}
-							>
+						{image && (
+							<Card className="rounded-lg overflow-hidden">
 								<div className="relative aspect-square">
 									<Image
-										src={src}
+										src={image}
 										alt="Generated image"
 										fill
 										objectFit="cover"
@@ -126,7 +123,7 @@ export default function ImagePage() {
 								</div>
 								<CardFooter className="p-2">
 									<Button
-										onClick={() => window.open(src)}
+										onClick={() => window.open(image!)}
 										variant="secondary"
 										className="w-full"
 									>
@@ -135,7 +132,7 @@ export default function ImagePage() {
 									</Button>
 								</CardFooter>
 							</Card>
-						))}
+						)}
 					</div>
 				</div>
 			</div>
