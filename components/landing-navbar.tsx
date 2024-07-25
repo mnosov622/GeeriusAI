@@ -20,14 +20,14 @@ export default function LandingNavbar() {
 				href="/"
 				className="flex items-center"
 			>
-				<div className="relative h-12 w-14 mr-3 mt-4">
+				<div className="relative h-12 w-14 mr-3">
 					<Image
 						src={logo}
 						alt="logo"
 						fill
 					/>
 				</div>
-				<h1 className={`${font.className} mt-4 text-white text-lg`}>Geerius AI</h1>
+				<h1 className={`${font.className} text-white text-lg`}>Geerius AI</h1>
 			</Link>
 
 			<div className="flex items-center gap-x-2">
