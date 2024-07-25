@@ -12,6 +12,7 @@ import { formSchema } from '@/constants';
 import { useProModal } from '@/hooks/use-pro-modal';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { track } from '@vercel/analytics';
 import axios from 'axios';
 import { MessageSquare } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -39,6 +40,7 @@ export default function ConversationPage() {
 	const errors = form.formState.errors;
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		track('Conversation Generation');
 		try {
 			const userMessage: ChatCompletionMessage = {
 				role: 'user',

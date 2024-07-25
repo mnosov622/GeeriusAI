@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { formSchema } from '@/constants';
 import { useProModal } from '@/hooks/use-pro-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { track } from '@vercel/analytics';
 import axios from 'axios';
 import { Video } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -33,6 +34,8 @@ export default function VideoPage() {
 	const isLoading = form.formState.isSubmitting;
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		track('Video Generation');
+
 		try {
 			setVideo(null);
 

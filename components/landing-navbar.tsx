@@ -9,6 +9,8 @@ import { Button } from './ui/button';
 
 const font = Montserrat({ subsets: ['latin'], weight: '600' });
 
+import { track } from '@vercel/analytics';
+
 export default function LandingNavbar() {
 	const { isSignedIn } = useAuth();
 
@@ -33,6 +35,7 @@ export default function LandingNavbar() {
 						variant="outline"
 						className="rounded-full"
 						size={'lg'}
+						onClick={() => (isSignedIn ? track('Go to dashboard') : track('Clicked Sign Up'))}
 					>
 						Get Started
 					</Button>

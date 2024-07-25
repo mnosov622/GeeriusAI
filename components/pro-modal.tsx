@@ -1,6 +1,7 @@
 import { TOOLS } from '@/constants';
 import { useProModal } from '@/hooks/use-pro-modal';
 import { cn } from '@/lib/utils';
+import { track } from '@vercel/analytics';
 import axios from 'axios';
 import { Check, Zap } from 'lucide-react';
 import { useState } from 'react';
@@ -77,7 +78,10 @@ export default function ProModal() {
 						size={'lg'}
 						variant="premium"
 						className="w-full"
-						onClick={onSubscribe}
+						onClick={() => {
+							onSubscribe();
+							track('Upgrade to Pro Clicked');
+						}}
 						disabled={loading}
 					>
 						Upgrade

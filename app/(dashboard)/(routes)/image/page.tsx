@@ -17,6 +17,7 @@ import {
 import { amountOptions, formSchema, resolutionOptions } from '@/constants';
 import { useProModal } from '@/hooks/use-pro-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { track } from '@vercel/analytics';
 import axios from 'axios';
 import { Download, ImageIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -44,6 +45,7 @@ export default function ImagePage() {
 	const isLoading = form.formState.isSubmitting;
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		track('Image Generation');
 		try {
 			setImages([]);
 

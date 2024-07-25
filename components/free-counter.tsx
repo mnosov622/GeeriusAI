@@ -1,5 +1,6 @@
 import { MAX_FREE_COUNTS } from '@/constants';
 import { useProModal } from '@/hooks/use-pro-modal';
+import { track } from '@vercel/analytics';
 import { Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
@@ -45,7 +46,10 @@ export default function FreeCounter({
 					<Button
 						className="w-full"
 						variant="premium"
-						onClick={onOpen}
+						onClick={() => {
+							onOpen();
+							track('Upgrade to Pro Clicked');
+						}}
 					>
 						<Zap className="w-4 h-4 mr-2 fill-white" />
 						Upgrade

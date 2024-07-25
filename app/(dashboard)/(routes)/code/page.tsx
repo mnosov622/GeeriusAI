@@ -12,6 +12,7 @@ import { formSchema } from '@/constants';
 import { useProModal } from '@/hooks/use-pro-modal';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { track } from '@vercel/analytics';
 import axios from 'axios';
 import { Code, Copy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -38,6 +39,7 @@ export default function CodePage() {
 	const isLoading = form.formState.isSubmitting;
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		track('Code Generation');
 		try {
 			const userMessage: ChatCompletionMessage = {
 				role: 'user',
