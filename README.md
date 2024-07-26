@@ -19,11 +19,14 @@ Generate original music tracks that fit any mood or theme. Great for musicians, 
 ### 💻 Code Generation
 Automate your coding tasks with AI-generated code. Enhance your development process with efficient and accurate code snippets.
 
+### 💬 Text-to-Speech Generation
+Convert any text to speech (different languages available).
+
 ## Getting Started
 
 1. **Sign Up**: Create a free account to start using the AI Creativity Suite.
 2. **Free Plan**: Enjoy 5 free generations to explore all the features.
-3. **Upgrade**: For unlimited generations, upgrade to our lifetime access plan for just $20.
+3. **Upgrade**: For unlimited generations, upgrade to our Geerius Pro plan for $8.99/month.
 
 ## Pricing
 
@@ -33,19 +36,11 @@ Automate your coding tasks with AI-generated code. Enhance your development proc
 - No credit card required
 
 ### Pro Plan
-- Only $10/month
+- Only $8.99/month
 - Unlimited Generations
 - Priority Support
 - Access to all future updates
 
-## Installation
+## Contribution
 
-To get started with the AI Creativity Suite, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/ai-creativity-suite.git
-
-2. Install dependencies & run the app .
-```bash
-npm install & npm start 
+If you would like to contribute or have an interesting idea, drop your suggestion at mnosov622@gmail.com or create a PR with your suggestions.
