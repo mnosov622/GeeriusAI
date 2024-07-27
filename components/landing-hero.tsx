@@ -16,10 +16,10 @@ export default function LandingHero() {
 					<TypeWriterComponent
 						options={{
 							strings: [
-								'Chatbot',
-								'Video Generation',
 								'Music Generation',
 								'Image Generation',
+								'Chatbot Conversations',
+								'Text to Speech Generation',
 								'Code Generation',
 							],
 							autoStart: true,
