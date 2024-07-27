@@ -4,7 +4,7 @@ import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import Replicate from 'replicate';
 
-export const maxDuration = 300;
+export const maxDuration = 60;
 
 const maxMusicDuration = 60;
 

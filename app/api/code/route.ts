@@ -5,6 +5,8 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { ChatCompletionMessage } from 'openai/resources/chat/index.mjs';
 
+export const maxDuration = 60;
+
 const openai = new OpenAI({
 	apiKey: process.env.OPEN_AI_KEY,
 });
