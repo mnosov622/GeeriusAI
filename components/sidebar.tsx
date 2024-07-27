@@ -9,7 +9,6 @@ import {
 	MusicIcon,
 	Settings,
 	Speech,
-	VideoIcon,
 } from 'lucide-react';
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
@@ -40,22 +39,10 @@ const routes = [
 		href: '/image',
 	},
 	{
-		label: 'Video Generation',
-		icon: VideoIcon,
-		color: 'text-orange-700',
-		href: '/video',
-	},
-	{
 		label: 'Music Generation',
 		icon: MusicIcon,
 		color: 'text-emerald-700',
 		href: '/music',
-	},
-	{
-		label: 'Code Generation',
-		icon: Code,
-		color: 'text-green-700',
-		href: '/code',
 	},
 	{
 		label: 'Text to Speech Generation',
@@ -63,6 +50,13 @@ const routes = [
 		color: 'text-blue-700',
 		href: '/text-to-speech',
 	},
+	{
+		label: 'Code Generation',
+		icon: Code,
+		color: 'text-green-700',
+		href: '/code',
+	},
+
 	{
 		label: 'Settings',
 		icon: Settings,

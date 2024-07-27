@@ -1,4 +1,4 @@
-import { Code, ImageIcon, MessageSquare, MusicIcon, VideoIcon } from 'lucide-react';
+import { Code, ImageIcon, MessageSquare, MusicIcon, Speech } from 'lucide-react';
 import * as z from 'zod';
 
 export const MAX_FREE_COUNTS = 5;
@@ -18,19 +18,20 @@ export const TOOLS = [
 		bgColor: 'bg-pink-700/10',
 		href: '/image',
 	},
-	{
-		label: 'Video Generation',
-		icon: VideoIcon,
-		color: 'text-orange-700',
-		bgColor: 'bg-orange-700/10',
-		href: '/video',
-	},
+
 	{
 		label: 'Music Generation',
 		icon: MusicIcon,
 		color: 'text-emerald-700',
 		bgColor: 'bg-emerald-700/10',
 		href: '/music',
+	},
+	{
+		label: 'Text to Speech Generation',
+		icon: Speech,
+		color: 'text-blue-700',
+		bgColor: 'bg-blue-700/10',
+		href: '/text-to-speech',
 	},
 	{
 		label: 'Code Generation',
