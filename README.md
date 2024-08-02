@@ -1,6 +1,6 @@
 # GeeriusAI
 
-Welcome to the AI platform! This powerful tool empowers you to engage with AI in various exciting ways: from having conversations to generating images, videos, music, and even code. 
+Welcome to the AI platform! This powerful tool empowers you to engage with AI in various exciting ways: from having conversations to generating images, music, text-to-speech and even code. 
 
 ## Features
 
